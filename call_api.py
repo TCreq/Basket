@@ -14,7 +14,7 @@ API_URL = "http://127.0.0.1:5000/predict"
 predictions = []
 for _, row in X_test.iterrows():
     features = list(row)
-    print(features)
+    # print(features)
 
     # On appelle l'API avec une requete POST, il faut fournir dans le json les variables (sous forme de liste, avec pour clé : "features")
     response = requests.post(API_URL, json={"features":features})  # requête POST
@@ -22,9 +22,9 @@ for _, row in X_test.iterrows():
     if response.status_code == 200:
         pred = response.json().get("prediction")  # Récupère la prédiction
         predictions.append(pred)
-        print(f"Entrée: {data} → Prédiction: {pred}")
+        print(f"Entrée: {features} → Prédiction: {pred}")
     else:
-        print(f"Erreur pour {data}: {response.text}")
+        print(f"Erreur pour {features}: {response.text}")
 
 
 
